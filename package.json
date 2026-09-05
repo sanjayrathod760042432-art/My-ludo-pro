@@ -1,0 +1,13 @@
+{
+  "name": "kamai-sathi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Play Store friendly rewards app starter with Express backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
