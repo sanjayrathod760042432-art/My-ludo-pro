@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Kamai Sathi rewards app">
+<title>कमाई साथी</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
+header{background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;padding:24px 18px 30px;border-radius:0 0 26px 26px}
+.wrap{max-width:720px;margin:auto;padding:0 16px}.brand{font-size:25px;font-weight:800}.sub{opacity:.9;margin-top:6px}
+.balance{background:#fff;margin-top:-14px;border-radius:20px;padding:20px;box-shadow:0 8px 25px #0001}.muted{color:#6b7280;font-size:13px}
+.coins{font-size:38px;font-weight:800;margin:5px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 16px #0000000b}.card h3{margin:0 0 6px;font-size:16px}
+section{margin-top:22px}h2{font-size:20px}.task{background:#fff;padding:15px;border-radius:15px;margin:10px 0;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.task b{display:block}.task small{color:#6b7280}button{border:0;border-radius:10px;padding:11px 15px;background:#2563eb;color:#fff;font-weight:700}
+button:disabled{background:#9ca3af}.ref{background:#eef4ff;padding:15px;border-radius:15px}.code{font-weight:800;letter-spacing:1px;font-size:18px}
+.adbox{border:2px dashed #cbd5e1;border-radius:15px;padding:18px;text-align:center;color:#64748b}
+.note{font-size:12px;line-height:1.5;color:#6b7280;margin:22px 0 35px}
+@media(max-width:440px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brand">💰 कमाई साथी</div><div class="sub">Rewards और verified tasks के लिए आपका app</div></div></header>
+
+<main class="wrap">
+<div class="balance">
+  <div class="muted">आपके Points</div>
+  <div class="coins" id="coins">0 🪙</div>
+  <div class="muted">Demo conversion: 100 points = ₹1</div>
+</div>
+
+<div class="grid">
+  <div class="card"><h3>💵 अनुमानित value</h3><b>₹<span id="rupees">0.00</span></b></div>
+  <div class="card"><h3>👥 Referrals</h3><b id="refs">0</b></div>
+</div>
+
+<section>
+<h2>📺 Rewarded Ad</h2>
+<div class="adbox">
+  <b>AdMob Rewarded Ad यहाँ आएगा</b>
+  <p>Production में अपना approved AdMob Rewarded Ad Unit ID लगाएँ।</p>
+  <button onclick="demoAd()">Demo Reward +20</button>
+</div>
+</section>
+
+<section>
+<h2>✅ Tasks</h2>
+<div class="task"><div><b>Daily Check-in</b><small>एक बार daily</small></div><button onclick="task(this,10)">+10</button></div>
+<div class="task"><div><b>Quiz पूरा करें</b><small>Demo quiz task</small></div><button onclick="task(this,50)">+50</button></div>
+<div class="task"><div><b>Partner Offer</b><small>Verified offer integration के बाद</small></div><button onclick="task(this,25)">+25</button></div>
+</section>
+
+<section>
+<h2>👥 Refer & Earn</h2>
+<div class="ref">
+  <div class="muted">आपका referral code</div>
+  <div class="code" id="code">KAMAI-12345</div>
+  <button onclick="copyCode()">Copy करें</button>
+</div>
+</section>
+
+<section>
+<h2>🏦 Wallet</h2>
+<div class="card">
+  <b>Balance: ₹<span id="wallet">0.00</span></b>
+  <p class="muted">Real withdrawal को payment provider, KYC/verification और server-side fraud checks के साथ जोड़ना होगा।</p>
+  <button onclick="alert('Withdrawal backend अभी setup नहीं है। पहले verified payment system जोड़ें।')">Withdrawal Request</button>
+</div>
+</section>
+
+<p class="note">
+यह starter app है। Points अपने-आप वास्तविक पैसे नहीं बनाते। वास्तविक revenue के लिए AdMob/affiliate/other approved monetization और compliant backend integration जरूरी है।
+किसी भी ad को click करने के लिए users को incentivize न करें; rewarded ads में केवल permitted rewards दें और Google Play/AdMob policies का पालन करें।
+</p>
+</main>
+
+<script>
+let coins=Number(localStorage.getItem("coins")||0);
+let refs=Number(localStorage.getItem("refs")||0);
+function render(){
+ document.getElementById("coins").textContent=coins+" 🪙";
+ document.getElementById("rupees").textContent=(coins/100).toFixed(2);
+ document.getElementById("wallet").textContent=(coins/100).toFixed(2);
+ document.getElementById("refs").textContent=refs;
+}
+function add(n){coins+=n;localStorage.setItem("coins",coins);render()}
+function task(btn,n){if(btn.disabled)return;add(n);btn.disabled=true;btn.textContent="Done ✓"}
+function demoAd(){add(20);alert("Demo reward: +20 points")}
+function copyCode(){navigator.clipboard?.writeText(document.getElementById("code").textContent);alert("Referral code copy हो गया")}
+render();
+</script>
+</body>
+</html>

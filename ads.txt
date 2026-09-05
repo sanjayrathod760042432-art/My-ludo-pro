@@ -1,0 +1,3 @@
+# AdMob शुरू करने के बाद अपनी publisher ID के अनुसार यह file भरें.
+# उदाहरण:
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
